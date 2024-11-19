@@ -29,10 +29,69 @@ variable "vpc_name" {
 }
 
 
+
 ###ssh vars
 
-variable "vms_ssh_root_key" {
+# variable "vms_ssh_root_key" {
+#   type        = string
+#   default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFmsrfSRL5iLSx+NcpfpUWB8uGcVxQalOcQcQ/r6yPRg yandex_cloud_nk3409"
+#   description = "ssh-keygen -t ed25519"
+# }
+
+
+variable "vm_web_family" {
   type        = string
-  default     = "<your_ssh_ed25519_key>"
-  description = "ssh-keygen -t ed25519"
+  default     = "ubuntu-2004-lts"
+  description = "yandex_compute_image"
+}
+
+variable "vm_web_name" {
+  type        = string
+  default     = "netology-develop-platform-web"
+  description = "yandex_compute_instance name"
+}
+
+variable "vm_web_platform_id" {
+  type        = string
+  default     = "standard-v1"
+  description = "yandex_compute_instance platform"
+}
+
+
+#-------------------
+variable "vm_resources" {
+  type = map(object({
+    cores         = number
+    memory        = number
+    core_fraction = number
+    type          = string
+    size          = number
+  }))
+  default = {
+    "web" = {
+      cores         = 2
+      memory        = 1
+      core_fraction = 5
+      type          = "network-hdd"
+      size          = 10
+    },
+    "db" = {
+      cores         = 2
+      memory        = 2
+      core_fraction = 20
+      type          = "network-hdd"
+      size          = 10
+    }
+  }
+}
+
+
+###ssh vars
+
+
+
+variable "metadata" {
+  type        = object({ serial-port-enable = number, ssh-keys = string })
+  default     = { serial-port-enable = 1, ssh-keys = "ubuntu:ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFmsrfSRL5iLSx+NcpfpUWB8uGcVxQalOcQcQ/r6yPRg yandex_cloud_nk3409" }
+  description = "Common ssh params"
 }
