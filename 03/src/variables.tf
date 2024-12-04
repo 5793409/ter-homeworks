@@ -1,8 +1,13 @@
 ###cloud vars
-variable "token" {
-  type        = string
-  description = "OAuth-token; https://cloud.yandex.ru/docs/iam/concepts/authorization/oauth-token"
-}
+# variable "token" {
+#   type        = string
+#   description = "OAuth-token; https://cloud.yandex.ru/docs/iam/concepts/authorization/oauth-token"
+# }
+
+# variable "yandex_key_json" {
+#   type        = string
+#   description = "Yandex service key"
+# }
 
 variable "cloud_id" {
   type        = string
@@ -29,4 +34,11 @@ variable "vpc_name" {
   type        = string
   default     = "develop"
   description = "VPC network&subnet name"
+}
+
+
+variable "platform_name1" {
+  type        = string
+  default     = "standard-v1"
+  description = "Platform name"
 }
